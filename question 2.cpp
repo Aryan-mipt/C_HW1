@@ -12,7 +12,6 @@ bool function(int x1, int y1, int x2, int y2, int X1, int Y1, int X2, int Y2) {
         return false;
     }
 
-
     return true;
 }
 
