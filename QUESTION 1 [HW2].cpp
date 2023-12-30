@@ -1,4 +1,3 @@
-#include <iostream>
 using namespace std;
 class fraction {
     int num;
@@ -25,6 +24,55 @@ public:
         den *= other.den;
         smpl();
         return *this;
+    }
+
+    fraction& operator-=(const fraction& other) {
+        num = num * other.den - other.num * den;
+        den *= other.den;
+        smpl();
+        return *this;
+    }
+
+    fraction& operator*=(const fraction& other) {
+        num *= other.num;
+        den *= other.den;
+        smpl();
+        return *this;
+    }
+
+    fraction& operator/=(const fraction& other) {
+        if (other.num != 0) {
+            num *= other.den;
+            den *= other.num;
+            smpl();
+        } else {
+            cerr << "Error: Division by zero." << endl;
+        }
+        return *this;
+    }
+
+    friend fraction operator+(const fraction& a, const fraction& b) {
+        fraction result = a;
+        result += b;
+        return result;
+    }
+
+    friend fraction operator-(const fraction& a, const fraction& b) {
+        fraction result = a;
+        result -= b;
+        return result;
+    }
+
+    friend fraction operator*(const fraction& a, const fraction& b) {
+        fraction result = a;
+        result *= b;
+        return result;
+    }
+
+    friend fraction operator/(const fraction& a, const fraction& b) {
+        fraction result = a;
+        result /= b;
+        return result;
     }
 
     friend ostream& operator<<(ostream& out, const fraction& frac) {
@@ -56,8 +104,21 @@ int main() {
 
     cout << "Entered fractions: a = " << a << ", b = " << b << endl;
 
-    a += b;
-    cout << "Sum of fractions 'a' and 'b' = " << a << endl;
+    
+    fraction sum = a + b;
+    cout << "Sum of fractions 'a' and 'b' = " << sum << endl;
+
+    
+    fraction diff = a - b;
+    cout << "Difference of fractions 'a' and 'b' = " << diff << endl;
+
+    
+    fraction product = a * b;
+    cout << "Product of fractions 'a' and 'b' = " << product << endl;
+
+    
+    fraction quotient = a / b;
+    cout << "Quotient of fractions 'a' and 'b' = " << quotient << endl;
 
     cout << "Fraction a as double: " << a.todbl() << endl;
 
